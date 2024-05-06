@@ -10,23 +10,69 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:root@localhost:3306/gr"
 }
 
 model User {
-  id       String    @id @default(uuid())
-  name     String
-  age      Int
-  email    String    @unique
-  password String
-  product  Product[]
+  id          String        @id @default(uuid())
+  name        String
+  age         Int
+  email       String        @unique
+  password    String
+  role        Role @default(Employe)
+  // userProduct UserProduct[]
+  UserProduct UserProduct[]
+}
+
+enum Role {
+  Stagiaire
+  Employe
+  Admin
+  Recruteur
+  ResponsableRH
+
+}
+
+model UserProduct {
+  id        String   @id @default(uuid())
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?
 }
 
 model Product {
-  id          String  @id @default(uuid())
+  id          String        @id @default(uuid())
   productName String
   imageUrl    String?
+  userProduct UserProduct[]
+}
 
-  User   User?   @relation(fields: [userId], references: [id])
-  userId String?
+model Offer {
+  id          String    @id @default(uuid())
+  title       String
+  type        String
+  description String
+  demande     Demande[]
+}
+
+model Demande {
+  id            String @id @default(uuid())
+  condidateName String
+  email         String
+  cv            String
+  note          String
+
+  Offer   Offer?  @relation(fields: [offerId], references: [id])
+  offerId String?
+}
+
+model RendezVous {
+  id String @id @default(uuid())
+}
+
+model Lettre {
+  id            String @id @default(uuid())
+  type          String
+  contenuLettre String
 }

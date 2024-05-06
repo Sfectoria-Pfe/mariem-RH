@@ -1,5 +1,5 @@
 import React from 'react'
-import Liste from './Liste';
+import Liste from '../components/Liste';
 
 
 const columns = [
