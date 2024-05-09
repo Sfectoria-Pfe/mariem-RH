@@ -15,7 +15,7 @@ async function main() {
       age: 16,
       email: 'marsfec@gmail.com',
       password: hashPassword,
-      role:'Admin'
+      role: 'Admin',
     },
   });
   const user2 = await prisma.user.create({
@@ -24,11 +24,23 @@ async function main() {
       age: 25,
       email: 'khalil@gmail.com',
       password: hashPassword,
-      role:'Employe'
+      role: 'Employe',
     },
   });
+
+  // execute the main function
+const type=["offre d'emploi","offre de stage"]
+  for (let i = 0; i < 10; i++) {
+    await prisma.offer.create({
+      data: {
+        title: 'Noteworthy technology acquisitions 2021',
+        description:
+          'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
+        type: type[Math.floor(Math.random() * 2)] 
+      },
+    });
+  }
 }
-// execute the main function
 main()
   .catch((e) => {
     console.error(e);
