@@ -6,12 +6,12 @@ import { PrismaService } from 'src/prisma/prisma.service';
 @Injectable()
 export class JobOffersService {
   constructor(private prisma: PrismaService) {}
-  create(createJobOfferDto: CreateJobOfferDto) {
-    return 'This action adds a new jobOffer';
+  async create(createJobOfferDto: CreateJobOfferDto) {
+    return await this.prisma.offer.create({ data: createJobOfferDto});
   }
 
   findAll() {
-    return this.prisma.offer.findMany();
+    return this.prisma.offer.findMany({include:{demande:true}});
   }
 
   findOne(id: string) {

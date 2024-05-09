@@ -28,12 +28,13 @@ async function main() {
     },
   });
 
+  const type=["offre d'emploi","offre de stage"]
+  const title=["Téléconseiller","Assistante Administrative et Commerciale","Chargé Clientèle Francophone","Femmes de Ménage","Agent Commercial / Livreur","Chauffeur","Secrétaire Retraitée","Assistante de Direction","Téléconseiller Juridique"]
   // execute the main function
-const type=["offre d'emploi","offre de stage"]
   for (let i = 0; i < 10; i++) {
     await prisma.offer.create({
       data: {
-        title: 'Noteworthy technology acquisitions 2021',
+        title: title[Math.floor(Math.random()*9)],
         description:
           'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
         type: type[Math.floor(Math.random() * 2)] 
