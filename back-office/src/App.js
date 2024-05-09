@@ -1,10 +1,10 @@
 import "./App.css";
-import Auth from "./apps/Auth";
-import Main from "./apps/Main";
 import Router from "./router/Router";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return <Router />;
 }
 
 export default App;
+
