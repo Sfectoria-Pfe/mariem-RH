@@ -14,14 +14,12 @@ datasource db {
 }
 
 model User {
-  id          String        @id @default(uuid())
-  name        String
-  age         Int
-  email       String        @unique
-  password    String
-  role        Role @default(Employe)
-  // userProduct UserProduct[]
-  UserProduct UserProduct[]
+  id       String @id @default(uuid())
+  name     String
+  age      Int
+  email    String @unique
+  password String
+  role     Role   @default(Employe)
 }
 
 enum Role {
@@ -30,22 +28,6 @@ enum Role {
   Admin
   Recruteur
   ResponsableRH
-
-}
-
-model UserProduct {
-  id        String   @id @default(uuid())
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
-  Product   Product? @relation(fields: [productId], references: [id])
-  productId String?
-}
-
-model Product {
-  id          String        @id @default(uuid())
-  productName String
-  imageUrl    String?
-  userProduct UserProduct[]
 }
 
 model Offer {
@@ -57,11 +39,16 @@ model Offer {
 }
 
 model Demande {
-  id            String @id @default(uuid())
-  condidateName String
-  email         String
-  cv            String
-  note          String
+  id          String @id @default(uuid())
+  name        String
+  lastName    String
+  age         Int
+  phoneNumber Int
+  adress      String
+  email       String
+  cv          String
+  note        String
+  type        String
 
   Offer   Offer?  @relation(fields: [offerId], references: [id])
   offerId String?
