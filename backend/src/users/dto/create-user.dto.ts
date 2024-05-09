@@ -6,7 +6,7 @@ import {
   IsString,
   MinLength,
 } from 'class-validator';
-import { Role } from '.prisma/client';
+// import { Role } from '.prisma/client';
 // dont forget  app.useGlobalPipes(new ValidationPipe()); in the main.ts
 export class CreateUserDto {
   @ApiProperty()

@@ -1,5 +1,5 @@
 import axios from "axios"
-const apiUrl ='http://localhost:5432/'
+const apiUrl ='http://localhost:4000/'
 export const getWithHeader = async(url)=>{
     const token =JSON.parse(localStorage.getItem('token'))
     const resp=await axios.get(apiUrl+URL,{headers:{Authorization:'bearer'+token}})

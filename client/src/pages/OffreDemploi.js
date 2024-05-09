@@ -10,7 +10,7 @@ export default function OffreDemploi() {
 const navigate =useNavigate()
   const fetchAllOffre = async () => {
     try {
-      const res = await axios.get("http://localhost:5432/job-offers");
+      const res = await axios.get("http://localhost:4000/job-offers");
       setOffre(res.data);
       console.log(res.data, "data");
     } catch (err) {

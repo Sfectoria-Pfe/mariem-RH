@@ -34,7 +34,7 @@ const Router = () => {
                     Authorization: 'Bearer ' + token
                 }
             }
-            const resp = await axios.get('http://localhost:5432/auth/me', config)
+            const resp = await axios.get('http://localhost:4000/auth/me', config)
             setUser(resp.data);
         } catch (err) {
             console.log(err);

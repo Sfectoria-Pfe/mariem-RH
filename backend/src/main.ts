@@ -22,6 +22,6 @@ app.useStaticAssets('upload',{prefix:'/upload'})
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(5432);
+  await app.listen(4000);
 }
 bootstrap();

@@ -54,7 +54,7 @@ const LoginTest = ({ setUpdate, update }) => {
   const navigate = useNavigate();
   const login = async () => {
     try {
-      const res = await axios.post("http://localhost:5432/auth",{email,password});
+      const res = await axios.post("http://localhost:4000/auth",{email,password});
       localStorage.setItem("token", JSON.stringify(res.data)); //bech thot objet ka string
       setUpdate(!update);
       navigate("/");

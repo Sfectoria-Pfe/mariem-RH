@@ -38,7 +38,7 @@ export default function Aply() {
       formData.append("file", cv);
 
       const response = await axios.post(
-        "http://localhost:5432/upload",
+        "http://localhost:4000/upload",
         formData
       );
 
@@ -51,7 +51,7 @@ export default function Aply() {
       };
       console.log(demandewithCv, "demandewithCv");
       const responsedemande = await axios.post(
-        "http://localhost:5432/demande",
+        "http://localhost:4000/demande",
         demandewithCv
       );
       console.log(responsedemande);
