@@ -4,7 +4,7 @@ import Main from "../apps/Main";
 import Auth from "../apps/Auth";
 import ForgetPassword from "../pages/ForgetPassword";
 
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/Dashboard"
 import Profile from "../pages/Profile";
 import JobOffre from "../pages/jobOffre/JobOffre";
 import Interview from "../pages/Interview";
@@ -35,7 +35,7 @@ const Router = () => {
           Authorization: "Bearer " + token,
         },
       };
-      const resp = await axios.get("http://localhost:5432/auth/me", config);
+      const resp = await axios.get("http://localhost:4000/auth/me", config);
       setUser(resp.data);
     } catch (err) {
       console.log(err);

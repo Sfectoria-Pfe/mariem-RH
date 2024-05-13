@@ -9,9 +9,10 @@ import { PrismaService } from './prisma/prisma.service';
 import { AuthModule } from './auth/auth.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { DemandeModule } from './demande/demande.module';
+import { CvModule } from './cv/cv.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, JobOffersModule, AuthModule, ContactsModule, DemandeModule],
+  imports: [PrismaModule, UsersModule, JobOffersModule, AuthModule, ContactsModule, DemandeModule, CvModule],
   controllers: [AppController],
   providers: [AppService,PrismaService],
 })

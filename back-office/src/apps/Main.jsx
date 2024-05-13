@@ -342,7 +342,7 @@ const Main = () => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className='d-flex justify-content-between'>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -355,17 +355,10 @@ const Main = () => {
           >
             <TfiMenuAlt />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            <MDBNavbar>
-              <MDBContainer fluid>
-                <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
-                  <input className='form-control' placeholder="Type query" aria-label="Search" type='Search' />
-                  <MDBBtn outline>Search</MDBBtn>
-                </MDBInputGroup>
-              </MDBContainer>
-            </MDBNavbar>
-          </Typography>
-          <Box sx={{ flexGrow: 0 }}>
+        
+          <Typography variant="h6" noWrap component="div" className='d-flex justify-content-end'>
+            <MDBNavbar >
+            <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="../img/lms" />
@@ -397,6 +390,9 @@ const Main = () => {
               ))}
             </Menu>
           </Box>
+            </MDBNavbar>
+          </Typography>
+         
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>

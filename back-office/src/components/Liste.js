@@ -1,25 +1,35 @@
-import React from 'react'
-import Box from '@mui/material/Box';
-import { DataGrid } from '@mui/x-data-grid';
+import React from "react";
+import Box from "@mui/material/Box";
+import { DataGrid, gridClasses } from "@mui/x-data-grid";
 
-export default function Liste({rows,columns}) {
+export default function Liste({ rows, columns }) {
   return (
     <div>
-        <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 5,
+      <Box sx={{ height: 400, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          getRowId={(row) => row.id}
+          getRowSpacing={(params) => ({
+            top: params.isFirstVisible ? 0 : 5,
+            bottom: params.isLastVisible ? 0 : 5,
+          })}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[5]}
-        disableRowSelectionOnClick
-      />
-    </Box>
+          }}
+          sx={{
+            [`& .${gridClasses.row}`]: {
+              bgcolor: "#daeaf088",
+            },
+          }}
+          pageSizeOptions={[5]}
+          disableRowSelectionOnClick
+        />
+      </Box>
     </div>
-  )
+  );
 }

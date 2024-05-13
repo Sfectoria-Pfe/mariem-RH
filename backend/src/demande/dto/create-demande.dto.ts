@@ -26,7 +26,11 @@ export class CreateDemandeDto {
   @ApiProperty()
   type: string;
   @ApiProperty()
-
-  offerId : string
- 
+  offerId: string;
+  @ApiProperty()
+  score: number;
+}
+export class UpdateScoreDto{
+  @ApiProperty()
+  score: number;
 }

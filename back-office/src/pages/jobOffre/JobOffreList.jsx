@@ -38,7 +38,7 @@ export default function JobOffreList() {
     const navigate = useNavigate()
 
     const fetchOffres = async () => {
-      const response = await axios.get("http://localhost:5432/job-offers");
+      const response = await axios.get("http://localhost:4000/job-offers");
       setRows(response.data.filter((el) => el.type === "offre d'emploi"));
     };
   

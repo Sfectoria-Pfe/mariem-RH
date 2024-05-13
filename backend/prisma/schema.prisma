@@ -31,15 +31,33 @@ enum Role {
 }
 
 model Offer {
-  id          String    @id @default(uuid())
+  id          String        @id @default(uuid())
   title       String
   type        String
   description String
+ 
   demande     Demande[]
+  offerSkills OfferSkills[]
+}
+
+model OfferSkills {
+  id String @id @default(uuid())
+
+  Offer    Offer?  @relation(fields: [offerId], references: [id])
+  offerId  String?
+  Skills   Skills? @relation(fields: [skillsId], references: [id])
+  skillsId String?
+}
+
+model Skills {
+  id String @id @default(uuid())
+
+  name        String
+  offerSkills OfferSkills[]
 }
 
 model Demande {
-  id          String @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   lastName    String
   age         Int
@@ -49,9 +67,9 @@ model Demande {
   cv          String
   note        String
   type        String
-
-  Offer   Offer?  @relation(fields: [offerId], references: [id])
-  offerId String?
+  score       Float   @default(0)
+  Offer       Offer?  @relation(fields: [offerId], references: [id])
+  offerId     String?
 }
 
 model RendezVous {

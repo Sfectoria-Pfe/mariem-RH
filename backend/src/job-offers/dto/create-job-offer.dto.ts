@@ -7,4 +7,6 @@ export class CreateJobOfferDto {
   description: string;
   @ApiProperty()
   type: string;
+  
+
 }

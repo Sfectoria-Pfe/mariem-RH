@@ -26,7 +26,7 @@ const navigate = useNavigate
       event.stopPropagation();
     }
     const response = await axios.post(
-      "http://localhost:5432/job-offers",
+      "http://localhost:4000/job-offers",
       jobOffre
     );
   

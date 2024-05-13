@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDemandeDto } from './dto/create-demande.dto';
+import { CreateDemandeDto, UpdateScoreDto } from './dto/create-demande.dto';
 import { UpdateDemandeDto } from './dto/update-demande.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Demande } from './entities/demande.entity';
 
 @Injectable()
 export class DemandeService {
@@ -20,8 +21,15 @@ export class DemandeService {
     return `This action returns a #${id} demande`;
   }
 
-  update(id: number, updateDemandeDto: UpdateDemandeDto) {
-    return `This action updates a #${id} demande`;
+  async update(id: string, dto: UpdateScoreDto) {
+    const {score}=dto
+    const response = await this.prisma.demande.update({
+      where: { id },
+      data: {score},
+    });
+    console.log(response,"reponse score");
+    
+    return response
   }
 
   remove(id: number) {

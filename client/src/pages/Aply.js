@@ -35,16 +35,17 @@ export default function Aply() {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append("file", cv);
+      formData.append("pdf", cv);
+      formData.append("offerId", id);
 
       const response = await axios.post(
-        "http://localhost:4000/upload",
+        "http://localhost:4000/cv/upload/",
         formData
       );
-
+      console.log(response, "responnnnnnnn");
       const demandewithCv = {
         ...demande,
-        cv: response.data.path,
+        cv: response.data.data.frontPath,
         offerId: id,
         age: +demande.age,
         phoneNumber: +demande.phoneNumber,
@@ -54,7 +55,12 @@ export default function Aply() {
         "http://localhost:4000/demande",
         demandewithCv
       );
-      console.log(responsedemande);
+      console.log(responsedemande.data.id, "iddemande");
+      var score = response.data.matchScore;
+      await axios.patch(
+        `http://localhost:4000/demande/${responsedemande.data.id}`,
+        { score } 
+      );
     } catch (err) {
       console.log(err);
     }

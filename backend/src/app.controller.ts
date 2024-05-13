@@ -43,20 +43,18 @@ export class AppController {
           // the original extension name
           cb(null, `${randomName}${extname(file.originalname)}`);
         },
-      }),
-    }),
-  )
-
-
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() dto:any) {
+      }),
+    }),
+  )
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() dto: any) {
     console.log(file, 'file');
-const data={
-  description: dto.description,
-           alt:dto.alt,
-           extension: file.filename.split('.')[1],
-           type: file.mimetype,
-           path: 'http://localhost:4000/'+'upload/'+ file.filename
-}
+    const data = {
+      description: dto.description,
+      alt: dto.alt,
+      extension: file.filename.split('.')[1],
+      type: file.mimetype,
+      path: 'http://localhost:4000/' + 'upload/' + file.filename,
+    };
     return data;
   }
 }
