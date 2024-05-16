@@ -1,3 +1,4 @@
+
 import { Injectable } from '@nestjs/common';
 import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
@@ -34,12 +35,11 @@ export class CvService {
       throw new Error('Offer not found');
     }
 
-    // Extract words from the offer description and related skills
-    const descriptionWords = this.extractWordsFromText(offer.description);
-    const skillsWords = offer.offerSkills.map((offerSkill) => offerSkill.Skills.name);
+    const skillsWords = offer.offerSkills.map((offerSkill) => offerSkill.Skills.name.toLowerCase().split(" "));
+console.log(skillsWords, "skillsWords");
 
     // Count the number of common words between description and skills
-    const commonWordsCount = this.countCommonWords(descriptionWords, skillsWords, cvText);
+    const commonWordsCount = this.countCommonWords( skillsWords.flat(), cvText);
 
     return commonWordsCount;
   }
@@ -51,16 +51,21 @@ export class CvService {
       .match(/\b\w+\b/g) || [];
   }
 
-  private countCommonWords(words1: string[], words2: string[], cvText: string): number {
+  private countCommonWords( words2: any, cvText: string): number {
    
-    const cvWords = this.extractWordsFromText(cvText.toLowerCase()); // Convert to lowercase for case-insensitive comparison 
-    const commonWords = cvWords.filter(word => words1.includes(word) || words2.includes(word));
-    console.log(commonWords,"common words");
+    const cvWords = this.extractWordsFromText(cvText.toLowerCase()); // Convert to lowercase for case-insensitive comparison
+    console.log(cvWords,"cvWords");
+    console.log(words2,"words2");
     
-    return commonWords.length;
+     
+    const commonWords = cvWords.filter(word =>  words2.includes(word));
+    console.log(commonWords,"common words");
+    const removeRepetition = new Set(commonWords) 
+       return removeRepetition.size;
 
   }
 
+  
 
   findAll() {
     return `This action returns all cv`;

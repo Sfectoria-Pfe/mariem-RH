@@ -7,16 +7,20 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class JobOffersService {
   constructor(private prisma: PrismaService) {}
   async create(createJobOfferDto: CreateJobOfferDto) {
-    return await this.prisma.offer.create({ data: createJobOfferDto});
+    return await this.prisma.offer.create({ data: createJobOfferDto });
   }
 
   findAll() {
-    return this.prisma.offer.findMany({include:{demande:true}});
+    return this.prisma.offer.findMany({
+      include: {
+        demande: true,
+        offerSkills: { include: { Skills:true } },
+      },
+    });
   }
 
   findOne(id: string) {
     return this.prisma.offer.findUnique({ where: { id } });
-
   }
 
   update(id: number, updateJobOfferDto: UpdateJobOfferDto) {

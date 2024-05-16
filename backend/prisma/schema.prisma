@@ -31,14 +31,16 @@ enum Role {
 }
 
 model Offer {
-  id          String        @id @default(uuid())
+  id          String @id @default(uuid())
   title       String
   type        String
   description String
- 
+
   demande     Demande[]
   offerSkills OfferSkills[]
 }
+
+
 
 model OfferSkills {
   id String @id @default(uuid())

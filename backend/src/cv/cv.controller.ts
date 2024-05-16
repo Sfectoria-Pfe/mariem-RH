@@ -31,7 +31,7 @@ export class CvController {
           //  Create folder if doesn't exist
           if (!existsSync(uploadPath)) {
             mkdirSync(uploadPath);
-            console.log('mkdir upload');
+         
           }
           cb(null, uploadPath);
         },
@@ -51,7 +51,6 @@ export class CvController {
   async uploadFile(@UploadedFile() file: Express.Multer.File, @Body() dto: any) {
     const { offerId } = dto; 
 
-    console.log(file, 'file');
     const data = {
       description: dto.description,
       alt: dto.alt,
@@ -65,12 +64,15 @@ export class CvController {
       throw new Error('Offer ID is required.');
     }
 
-    console.log('File path:', data.path);
+   
 
     const pdffile = fs.readFileSync(data.path);
 
     const parsedData = await pdfParse(pdffile)
     const pdfText = parsedData.text;
+   
+    
+    // const matchScore = await this.cvService.calculateMatchScore(pdfText , offerId);
     const matchScore = await this.cvService.calculateMatchScore(pdfText , offerId);
 
     return { matchScore,data};
