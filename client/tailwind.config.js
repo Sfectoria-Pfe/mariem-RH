@@ -21,12 +21,15 @@ module.exports = {
       colors: {
         primary: '#212353',
         secondary: '#4B5D68',
+        blue: "#000168",
         accent: {
           primary: '#9C69E2',
           primary_hover: '#9059DB',
           secondary: '#F063B8',
           secondary_hover: '#E350A9',
           tertiary: '#68C9BA',
+          blue: "#000168",
+
         },
       },
       backgroundImage: {

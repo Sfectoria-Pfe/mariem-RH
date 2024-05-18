@@ -27,7 +27,10 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Copyright(props) {
+  const notify = () => toast("Wow so easy!");
   return (
     <Typography
       variant="body2"
@@ -74,6 +77,10 @@ const LoginTest = ({ setUpdate, update }) => {
           <FormCard className="mt-5 p-1">
             <ThemeProvider theme={defaultTheme}>
               <Container component="main" maxWidth="xs">
+              <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
                 <CssBaseline />
                 <Box
                   sx={{

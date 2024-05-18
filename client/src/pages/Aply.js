@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-
+import Titles from "../components/Titles";
+// import wire from "../assets/img/wire.png";
 export default function Aply() {
   const [demande, setDemande] = useState({
     name: "",
@@ -67,13 +68,36 @@ export default function Aply() {
   };
 
   return (
+
+
+<div>
+<div className="relative overflow-hidden bg-cover bg-no-repeat bg-[50%] h-[500px] bg-[url('https://tecdn.b-cdn.net/img/new/textures/full/142.jpg')]">
+
+
+  </div>
+
+  <div class="w-100 mx-auto px-6 sm:max-w-2xl md:max-w-3xl md:px-12 lg:max-w-5xl xl:max-w-7xl xl:px-32">
+    <div class="text-center">
+      <div
+        class="block rounded-lg bg-[hsla(0,0%,100%,0.55)] px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-[hsla(0,0%,5%,0.55)] dark:shadow-black/20 md:py-16 md:px-12 mt-[-170px] backdrop-blur-[30px]">
+         <Titles title="Job " subtitle="Take the Next Step in Your Professional Journey" marked="Submission"/>
+
+        {/* <h1 class="mt-2 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
+          The best offer on the market <br /><span class="text-primary">for your business</span>
+        </h1>
+        <a class="mb-2 inline-block rounded bg-primary px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] md:mr-2 md:mb-0"
+          data-te-ripple-init data-te-ripple-color="light" href="#!" role="button">Get started</a>
+        <a class="inline-block rounded px-12 pt-4 pb-3.5 text-sm font-medium uppercase leading-normal text-primary transition duration-150 ease-in-out hover:bg-neutral-500 hover:bg-opacity-10 hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:hover:bg-neutral-700 dark:hover:bg-opacity-40"
+          data-te-ripple-init data-te-ripple-color="light" href="#!" role="button">Learn more</a> */}
+      </div>
+    </div>
+  </div>
+
     <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+      
       <div class="container max-w-screen-lg mx-auto">
         <div>
-          <h2 class="font-semibold text-xl text-gray-600">Responsive Form</h2>
-          <p class="text-gray-500 mb-6">
-            Form is mobile responsive. Give it a try.
-          </p>
+          
 
           <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
@@ -239,18 +263,10 @@ export default function Aply() {
           </div>
         </div>
 
-        <a
-          href="https://www.buymeacoffee.com/dgauderman"
-          target="_blank"
-          class="md:absolute bottom-0 right-0 p-4 float-right"
-        >
-          <img
-            src="https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-3.svg"
-            alt="Buy Me A Coffee"
-            class="transition-all rounded-full w-14 -rotate-45 hover:shadow-sm shadow-lg ring hover:ring-4 ring-white"
-          />
-        </a>
+        
       </div>
     </div>
+</div>
+
   );
 }

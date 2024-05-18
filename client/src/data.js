@@ -58,36 +58,36 @@ export const featuresData = {
     'With our app you can view the route of your order, from our local headquarters to the place where you are. Look for the app now!',
   list: [
     {
-      image: Feature1Img,
+      image: "https://beta.coficab.com/wp-content/uploads/2021/06/ecof.jpg",
       bgImage: Feature1BgImg,
-      title: 'Payment Done',
+      title: 'Electromobility Cables',
       description:
-        'Pay with a Visa or PayPal card and without much ado',
+        'High voltage cables for ELECTROMOBILITY',
       linkText: 'Learn more',
       delay: '400',
     },
     {
-      image: Feature2Img,
+      image:"https://beta.coficab.com/wp-content/uploads/2021/06/ecof-charge.jpg",
       bgImage: Feature2BgImg,
-      title: 'Find Your Product',
+      title: 'Charging Cables',
       description:
-        'We offer sale of products through the Internet..',
+        'According to the plugins in the market for HYBRID AND FULL ELECTRIC CARS',
       linkText: 'Learn more',
       delay: '700',
     },
     {
-      image: Feature3Img,
+      image: "https://beta.coficab.com/wp-content/uploads/2021/06/cof-data.jpg",
       bgImage: Feature3BgImg,
-      title: 'Print Out',
+      title: 'Data Cables',
       description:
-        'Print out service gives you convenience if someday you need print data, just edit it all and just print it.',
+        'For CONNECTIVITY to be used in multimedia applications',
       linkText: 'Learn more',
       delay: '1000',
     },
     {
-      image: Feature4Img,
+      image: "https://beta.coficab.com/wp-content/uploads/2021/06/cof-sense.jpg",
       bgImage: Feature4BgImg,
-      title: 'Product Received',
+      title: 'Sensor Cables',
       description:
         'In our app you can see the delay time of your order...',
       linkText: 'Learn more',

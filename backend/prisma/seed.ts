@@ -139,31 +139,29 @@ async function main() {
   ];
   // execute the main function
   for (let i = 0; i < 10; i++) {
-    await prisma.offer.create({
+    const randomTitleIndex = Math.floor(Math.random() * 9);
+    const randomTypeIndex = Math.floor(Math.random() * 2);
+  
+    console.log('Random Title Index:', randomTitleIndex);
+    console.log('Random Type Index:', randomTypeIndex);
+  
+    const createdOffer = await prisma.offer.create({
       data: {
-        title: title[Math.floor(Math.random() * 9)],
-        description:
-          'Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.',
-        type: type[Math.floor(Math.random() * 2)],
+        title: title[randomTitleIndex],
+        description: 'Solutions Tech XYZ est un fournisseur de premier plan de solutions logicielles innovantes dans le secteur de la fintech. Notre mission est de révolutionner la manière dont les institutions financières gèrent leurs opérations, en les rendant plus efficaces et centrées sur le client.',
+        type: type[randomTypeIndex],
         offerSkills: {
           create: [
-            {
-              Skills: {
-                create: { name: allSkills[Math.floor(Math.random()*72)] },
-              }
-            },
-            {
-              Skills: { create: { name: allSkills[Math.floor(Math.random()*72)] } },
-            },
-            {
-              Skills: { create: { name: allSkills[Math.floor(Math.random()*72)] } },
-            },
+            { Skills: { create: { name: allSkills[Math.floor(Math.random() * 72)] } } },
+            { Skills: { create: { name: allSkills[Math.floor(Math.random() * 72)] } } },
+            { Skills: { create: { name: allSkills[Math.floor(Math.random() * 72)] } } },
           ],
         },
       },
-    });
-  }
-}
+    })
+  
+    console.log('Created Offer:', createdOffer)
+}}
 main()
   .catch((e) => {
     console.error(e);

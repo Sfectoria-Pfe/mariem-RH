@@ -34,8 +34,8 @@ model Offer {
   id          String @id @default(uuid())
   title       String
   type        String
-  description String
-
+  description String @db.Text
+ created_at  DateTime    @default(now())
   demande     Demande[]
   offerSkills OfferSkills[]
 }

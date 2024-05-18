@@ -16,6 +16,9 @@ export class JobOffersService {
         demande: true,
         offerSkills: { include: { Skills:true } },
       },
+      where:{
+        type : "offre d'emploi"
+      }
     });
   }
 
