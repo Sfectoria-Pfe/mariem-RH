@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import AspectRatio from '@mui/joy/AspectRatio';
 import Card from '@mui/joy/Card';
@@ -10,15 +10,17 @@ import Typography from '@mui/joy/Typography';
 import Link from '@mui/joy/Link';
 import Chip from '@mui/joy/Chip';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Box from '@mui/material/Box'; // Import Box from Material-UI
+import Box from '@mui/material/Box'; 
 import LinearProgress from '@mui/material/LinearProgress';
-import Liste from '../../../components/Liste'; // Ensure Liste is correctly imported
+import Liste from '../../../components/Liste'; 
+import { GridActionsCellItem, GridDeleteIcon } from '@mui/x-data-grid';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import HeaderPage from '../../../components/HeaderPage';
 export default function InternOffDetail() {
   const [offer, setOffer] = useState({});
   const [rows, setRows] = useState([]);
   const { id } = useParams();
-
+const navigate = useNavigate()
 
 
  
@@ -166,26 +168,26 @@ export default function InternOffDetail() {
       )
     },
 
-    // {
+    {
 
-    //   field: 'actions',
-    //   headerName: 'Action',
-    //   type: 'actions',
-    //   width: 150,
-    //   getActions: (params) => [
-    //     <GridActionsCellItem 
-    //     icon={<DeleteIcon/>}
-    //     // onClick={() =>{
-    //     //   setSelectId(params.row.id)
-    //     //   handleClickOpen ()}}
-    //     />
-    //     ,
-    //     <GridActionsCellItem 
-    //     icon={<RemoveRedEyeIcon/>}
-    //     // onClick={()=>navigate(`jobOffer-detail/${params.row.id}`)}
-    //     />
-    //   ],
-    // },
+      field: 'actions',
+      headerName: 'Action',
+      type: 'actions',
+      width: 150,
+      getActions: (params) => [
+        <GridActionsCellItem
+        icon={<GridDeleteIcon/>}
+        // onClick={() =>{
+        //   setSelectId(params.row.id)
+        //   handleClickOpen ()}}
+        />
+        ,
+        <GridActionsCellItem 
+        icon={<RemoveRedEyeIcon />}
+        onClick={() => navigate(`/demandes/demande-detail/${params.row.id}`, { state: { row: params.row } })}
+        />
+      ],
+    },
   ];
   return (
     <div>
