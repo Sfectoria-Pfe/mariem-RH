@@ -49,7 +49,7 @@
 //     alignItems: "center",
 //     justifyContent: "flex-end",
 //     padding: theme.spacing(0, 1),
-   
+
 //     ...theme.mixins.toolbar,
 //   }));
 
@@ -203,10 +203,10 @@
 
 //      <div>
 //        {toggle && <Sidebar setToggle={setToggle}/>}
-      
+
 //        <Header setToggle={setToggle} toggle={toggle}/>
 //        <div style={{paddingLeft:240,paddingTop:70}}><Outlet/></div>
-      
+
 //      </div>
 //    )
 //  }
@@ -318,7 +318,7 @@ const Main = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = React.useContext(MyContext)
-  console.log(user , 'user from main')
+  console.log(user, 'user from main')
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -355,44 +355,46 @@ const Main = () => {
           >
             <TfiMenuAlt />
           </IconButton>
-        
+
           <Typography variant="h6" noWrap component="div" className='d-flex justify-content-end'>
             <MDBNavbar >
-            <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="../img/lms" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={()=>{if(setting=='Logout'){
-                  localStorage.clear()
-                  window.location.href="/"
-                }}}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Remy Sharp" src="../img/lms" />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={() => {
+                      if (setting == 'Logout') {
+                        localStorage.clear()
+                        window.location.href = "/"
+                      }
+                    }}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </MDBNavbar>
           </Typography>
-         
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -404,17 +406,17 @@ const Main = () => {
         <Divider />
         <List>
           {[
-  { name: "Dashboard", path: "/",icon:<MdDashboard /> ,roles:['Admin','ResponsableRH']},
-  { name: "Profile", path: "profile",icon:<CgProfile />,roles:['Admin','ResponsableRH','Recruteur','Employe','Stagiaire',] },
-  { name: "Joboffre", path: "joboffre" ,icon:<AiFillFolder />,roles:['Admin','ResponsablesRH']},
-  { name: "Interview", path: "interview",icon:<MdSettingsAccessibility />,roles:['Admin','ResponsableRH','Recruteur'] },
-  { name: "Internship offer", path: "internshipoffer",icon:<AiFillFolder />,roles:['Admin','ResponsableRH','Recruteur'] },
-  {name:"Condition",path:"condition",icon:<IoSettings />,roles:['Admin','ResponsableRH','Recruteur','Employe','Stagiaire']},
-  {name:"Condidature",path:"condidature",icon:<FaUsers />,roles:['Admin','ResponsableRH','Recruteur']}
-].map((e, index) => {
-              if (e.roles.includes(user.role)) {
-                return (
-                  <ListItem key={e.name} disablePadding sx={{ display: 'block' }}>
+            { name: "Dashboard", path: "/", icon: <MdDashboard />, roles: ['Admin', 'ResponsableRH'] },
+            { name: "Profile", path: "profile", icon: <CgProfile />, roles: ['Admin', 'ResponsableRH', 'Recruteur', 'Employe', 'Stagiaire',] },
+            { name: "Joboffre", path: "joboffre", icon: <AiFillFolder />, roles: ['Admin', 'ResponsablesRH'] },
+            { name: "Demandes", path: "demandes", icon: <MdSettingsAccessibility />, roles: ['Admin', 'ResponsableRH', 'Recruteur'] },
+            { name: "Internship offer", path: "internshipoffer", icon: <AiFillFolder />, roles: ['Admin', 'ResponsableRH', 'Recruteur'] },
+            { name: "Condition", path: "condition", icon: <IoSettings />, roles: ['Admin', 'ResponsableRH', 'Recruteur', 'Employe', 'Stagiaire'] },
+            { name: "Condidature", path: "condidature", icon: <FaUsers />, roles: ['Admin', 'ResponsableRH', 'Recruteur'] }
+          ].map((e, index) => {
+            if (e.roles.includes(user.role)) {
+              return (
+                <ListItem key={e.name} disablePadding sx={{ display: 'block' }}>
                   <ListItemButton onClick={() => navigate(e.path)}
                     sx={{
                       minHeight: 48,
@@ -434,10 +436,10 @@ const Main = () => {
                     <ListItemText primary={e.name} sx={{ opacity: open ? 1 : 0 }} />
                   </ListItemButton>
                 </ListItem>
-                )
-              } 
-            
-        })}
+              )
+            }
+
+          })}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

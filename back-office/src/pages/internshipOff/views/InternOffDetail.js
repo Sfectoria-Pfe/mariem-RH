@@ -10,12 +10,11 @@ import Typography from '@mui/joy/Typography';
 import Link from '@mui/joy/Link';
 import Chip from '@mui/joy/Chip';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Box from '@mui/material/Box'; 
+import Box from '@mui/material/Box'; // Import Box from Material-UI
 import LinearProgress from '@mui/material/LinearProgress';
-import Liste from '../../components/Liste'; 
-import HeaderPage from '../../components/HeaderPage';
-
-export default function JobOffreDetail() {
+import Liste from '../../../components/Liste'; // Ensure Liste is correctly imported
+import HeaderPage from '../../../components/HeaderPage';
+export default function InternOffDetail() {
   const [offer, setOffer] = useState({});
   const [rows, setRows] = useState([]);
   const { id } = useParams();
@@ -92,7 +91,7 @@ export default function JobOffreDetail() {
     {
       field: "adress",
       headerName: "Adress",
-      width: 250,
+      width: 150,
       editable: true,
       valueGetter: (value, row) => row?.adress
 
@@ -188,63 +187,61 @@ export default function JobOffreDetail() {
     //   ],
     // },
   ];
-
   return (
     <div>
-      <HeaderPage parent={"Job Offers"} firstChild={"Details"}/>
+    <HeaderPage parent={"Internship Offers"} firstChild={"Details"}/>
 
-      <Card orientation="horizontal" variant="outlined" className="mb-2">
-        <CardOverflow
-          variant="soft"
-          color="primary"
-          sx={{
-            px: 0.2,
-            writingMode: 'vertical-rl',
-            justifyContent: 'center',
-            fontSize: 'xs',
-            fontWeight: 'xl',
-            letterSpacing: '1px',
-            textTransform: 'uppercase',
-            borderLeft: '1px solid',
-            borderColor: 'divider',
-            padding: "10px"
-          }}
-        >
-          {offer?.services?.title}
-        </CardOverflow>
-        <CardContent className="p-5 d-flex gap-5">
-          <Typography level="title-lg" id="card-description">
-            {offer.title}
-          </Typography>
-          <Typography level="body-sm" aria-describedby="card-description" mb={1}>
-            <Link
-              overlay
-              underline="none"
-              href="#interactive-card"
-              sx={{ color: 'text.tertiary' }}
+    <Card orientation="horizontal" variant="outlined" className="mb-2">
+      <CardOverflow
+        variant="soft"
+        color="primary"
+        sx={{
+          px: 0.2,
+          writingMode: 'vertical-rl',
+          justifyContent: 'center',
+          fontSize: 'xs',
+          fontWeight: 'xl',
+          letterSpacing: '1px',
+          textTransform: 'uppercase',
+          borderLeft: '1px solid',
+          borderColor: 'divider',
+          padding: "10px"
+        }}
+      >
+        {offer?.services?.title}
+      </CardOverflow>
+      <CardContent className="p-5 d-flex gap-5">
+        <Typography level="title-lg" id="card-description">
+          {offer.title}
+        </Typography>
+        <Typography level="body-sm" aria-describedby="card-description" mb={1}>
+          <Link
+            overlay
+            underline="none"
+            href="#interactive-card"
+            sx={{ color: 'text.tertiary' }}
+          >
+            {offer.description}
+          </Link>
+        </Typography>
+        <div className='d-flex gap-4'>
+          {offer?.offerSkills?.map((elem, i) => (
+            <Chip
+              variant="filled"
+              color="primary"
+              size="md"
+              sx={{ pointerEvents: 'none', padding: "15px", backgroundColor: "#e3effb", color: "#12467b" }}
+              key={i}
             >
-              {offer.description}
-            </Link>
-          </Typography>
-          <div className='d-flex gap-4'>
-            {offer?.offerSkills?.map((elem, i) => (
-              <Chip
-                variant="filled"
-                color="primary"
-                size="md"
-                sx={{ pointerEvents: 'none', padding: "15px", backgroundColor: "#e3effb", color: "#12467b" }}
-                key={i}
-              >
-                {elem.Skills.name}
-              </Chip>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-      <HeaderPage parent={"Demandes"} firstChild={"List"}/>
+              {elem.Skills.name}
+            </Chip>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
+    <HeaderPage parent={"Demandes"} firstChild={"List"}/>
 
-      <Liste rows={rows} columns={columns} /> 
-    </div>
-  );
+    <Liste rows={rows} columns={columns} /> {/* Pass rows and columns correctly */}
+  </div>
+  )
 }
-

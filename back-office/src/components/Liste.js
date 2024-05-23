@@ -5,7 +5,7 @@ import { DataGrid, gridClasses } from "@mui/x-data-grid";
 export default function Liste({ rows, columns }) {
   return (
     <div>
-      <Box sx={{ height: 400, width: "100%" }}>
+      <Box sx={{ height: 500, width: "100%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -26,6 +26,7 @@ export default function Liste({ rows, columns }) {
               bgcolor: "#daeaf088",
             },
           }}
+          
           pageSizeOptions={[5]}
           disableRowSelectionOnClick
         />

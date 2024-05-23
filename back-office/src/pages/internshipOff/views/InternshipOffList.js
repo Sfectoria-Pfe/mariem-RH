@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Liste from "../../components/Liste";
+import Liste from "../../../components/Liste";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import HeaderPage from "../../components/HeaderPage";
-export default function JobOffreList() {
+import HeaderPage from "../../../components/HeaderPage";
+export default function InternshipOffList() {
   const [rows, setRows] = useState([]);
   const navigate = useNavigate()
 
   const fetchOffres = async () => {
-    const response = await axios.get("http://localhost:4000/job-offers");
-    setRows(response.data.filter((el) => el.type === "offre d'emploi"));
+    const response = await axios.get("http://localhost:4000/job-offers/offre-de-stage");
+    setRows(response.data);
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export default function JobOffreList() {
         ,
         <GridActionsCellItem
           icon={<RemoveRedEyeIcon />}
-          onClick={() => navigate(`jobOffer-detail/${params.row.id}`)}
+          onClick={() => navigate(`internOffre-detail/${params.row.id}`)}
         />
       ],
     },
@@ -72,10 +72,10 @@ export default function JobOffreList() {
 
   return (
     <div>
-      <HeaderPage parent={"Job Offers"} firstChild={"List"}/>
+      <HeaderPage parent={"Internship Offers"} firstChild={"List"}/>
       <div class="d-flex justify-content-end my-4">
-        <button className="btn btn-primary " onClick={() => navigate("add-jobOffer")}>
-         Add Job-Offer
+        <button className="btn btn-primary " onClick={() => navigate("add-InternshipOff")}>
+          Add Internship Offer
         </button>
       </div>
       <Liste rows={rows} columns={columns} />
