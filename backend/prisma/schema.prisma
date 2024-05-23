@@ -22,6 +22,31 @@ model User {
   role     Role   @default(Employe)
 }
 
+model Intern {
+  id  String @id @default(uuid())
+  name String
+  lastName String
+  tel String
+  adress String
+  email String
+
+  cin Int
+  birth DateTime
+  debutDeStage DateTime @default(now())
+  finDeStage DateTime @default(now())
+  services   Services? @relation(fields: [servicesId], references: [id])
+  servicesId String?
+}
+
+model Services {
+  id String @id @default(uuid())
+  title String
+  interns Intern[]
+  serviceDemande ServiceDemande[]
+  offer Offer[]
+
+}
+
 enum Role {
   Stagiaire
   Employe
@@ -36,6 +61,8 @@ model Offer {
   type        String
   description String @db.Text
  created_at  DateTime    @default(now())
+  services   Services? @relation(fields: [servicesId], references: [id])
+  servicesId String?
   demande     Demande[]
   offerSkills OfferSkills[]
 }
@@ -72,6 +99,16 @@ model Demande {
   score       Float   @default(0)
   Offer       Offer?  @relation(fields: [offerId], references: [id])
   offerId     String?
+  serviceDemande ServiceDemande[]
+  matchedSkills Json?
+}
+model ServiceDemande {
+  id String @id @default(uuid())
+
+  demande   Demande?  @relation(fields: [demandeId], references: [id])
+  demandeId  String?
+  services   Services? @relation(fields: [servicesId], references: [id])
+  servicesId String?
 }
 
 model RendezVous {

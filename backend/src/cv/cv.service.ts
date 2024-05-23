@@ -12,13 +12,12 @@ const pipelineAsync = promisify(pipeline);
 @Injectable()
 export class CvService {
   constructor(private readonly prisma: PrismaService) {}
+
   create(createCvDto: CreateCvDto) {
     return 'This action adds a new cv';
   }
 
-  
- 
-  async calculateMatchScore(cvText: string, offerId: string): Promise<number> {
+  async calculateMatchScore(cvText: string, offerId: string): Promise<{ matchScore: number; commonWords: string[] }> {
     // Fetch the offer details with related skills from the database
     const offer = await this.prisma.offer.findUnique({
       where: { id: offerId },
@@ -30,42 +29,35 @@ export class CvService {
         },
       },
     });
-    
+
     if (!offer) {
       throw new Error('Offer not found');
     }
 
     const skillsWords = offer.offerSkills.map((offerSkill) => offerSkill.Skills.name.toLowerCase().split(" "));
-console.log(skillsWords, "skillsWords");
+   
 
     // Count the number of common words between description and skills
-    const commonWordsCount = this.countCommonWords( skillsWords.flat(), cvText);
+    const { commonWords, count } = this.countCommonWords(skillsWords.flat(), cvText);
 
-    return commonWordsCount;
+    return { matchScore: count, commonWords };
   }
 
   private extractWordsFromText(text: string): string[] {
-    
     return text
-      .toLowerCase() 
+      .toLowerCase()
       .match(/\b\w+\b/g) || [];
   }
 
-  private countCommonWords( words2: any, cvText: string): number {
-   
-    const cvWords = this.extractWordsFromText(cvText.toLowerCase()); // Convert to lowercase for case-insensitive comparison
-    console.log(cvWords,"cvWords");
-    console.log(words2,"words2");
-    
-     
-    const commonWords = cvWords.filter(word =>  words2.includes(word));
-    console.log(commonWords,"common words");
-    const removeRepetition = new Set(commonWords) 
-       return removeRepetition.size;
-
-  }
-
+  private countCommonWords(words2: any, cvText: string): { commonWords: string[], count: number } {
+    const cvWords = this.extractWordsFromText(cvText.toLowerCase());
   
+
+    const commonWords = cvWords.filter(word => words2.includes(word));
+
+    const removeRepetition = new Set(commonWords);
+    return { commonWords: Array.from(removeRepetition), count: removeRepetition.size };
+  }
 
   findAll() {
     return `This action returns all cv`;

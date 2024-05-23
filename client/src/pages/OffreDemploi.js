@@ -34,29 +34,15 @@ export default function OffreDemploi() {
 
 
   return (
-    <div >
-      {/* <div className="text-center">
-        <h2
-          className="h2 mb-6 xl:mb-12"
-          data-aos="fade-down"
-          data-aos-delay="100"
-        >
-          Some Offre d'emploi we offre
-        </h2>
-        <p
-          className="lead max-w-[584px] mx-auto mb-16 xl:mb-24"
-          data-aos="fade-down"
-          data-aos-delay="200"
-        >
-          With our app you can view the route of your order, from our local
-          headquarters to the place where you are. Look for the app now!
-        </p>
-      </div> */}
+    <div  className='mb-[110px]'>
+   
       <HeaderPage  img={img}/>
       
-      <Titles title="Offres " subtitle="Trouvez des Opportunités de Carrière Passionnantes et Postulez Maintenant!" marked="d'Emploi"/>
+      <Titles title="Offres "  subtitle="Trouvez des Opportunités de Carrière Passionnantes et Postulez Maintenant!" marked="d'Emploi"/>
       {offre.map((elem)=>(
+          <div className="m-5">
       <HorizantalCard onClickBtn2={()=>navigate(`/apply/${elem.id}`)} title={elem.title} description={elem.description} btn1="Read More" btn2="Apply" skills={elem.offerSkills.map((skill) => skill.Skills.name)}  time={elem.created_at}/>
+      </div>
       ))}
     </div>
   );

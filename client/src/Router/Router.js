@@ -7,6 +7,7 @@ import OffreDemploi from "../pages/OffreDemploi";
 import OffreDeStage from "../pages/OffreDeStage";
 import Contact from "../pages/Contact";
 import Aply from "../pages/Aply";
+import AplyStage from "../pages/AplyStage";
 
 export default function Router() {
   return (
@@ -17,6 +18,7 @@ export default function Router() {
           <Route path="offre-d'emploi" element={<OffreDemploi />} />
           <Route path="offre-de-stage" element={<OffreDeStage />} />
           <Route path="apply/:id" element={<Aply />} />
+          <Route path="apply-stage/:id" element={<AplyStage />} />
           <Route path="contact" element={<Contact/>} />
         
         </Route>

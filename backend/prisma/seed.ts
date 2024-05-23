@@ -1,8 +1,9 @@
 // prisma/seed.ts
 
+
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-
+// import demandesData from './data';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
@@ -137,19 +138,44 @@ async function main() {
     'Mechanical Engineering',
     'Electrical Engineering',
   ];
+  const departments = [
+    "Production Department",
+    "Quality Control Department",
+    "Research and Development (R&D) Department",
+    "Engineering Department",
+    "Maintenance Department",
+    "Logistics and Supply Chain Department"
+  ]
+  const departmentsIds = []
+
+  for (let i = 0; i < departments.length; i++) {
+    const deps = await prisma.services.create({
+      data: {
+        title: departments[i]
+      }
+    })
+    departmentsIds.push(deps.id)
+  }
+
+
+
+
+
   // execute the main function
+  const offerIds = []
   for (let i = 0; i < 10; i++) {
     const randomTitleIndex = Math.floor(Math.random() * 9);
     const randomTypeIndex = Math.floor(Math.random() * 2);
-  
+
     console.log('Random Title Index:', randomTitleIndex);
     console.log('Random Type Index:', randomTypeIndex);
-  
+
     const createdOffer = await prisma.offer.create({
       data: {
         title: title[randomTitleIndex],
         description: 'Solutions Tech XYZ est un fournisseur de premier plan de solutions logicielles innovantes dans le secteur de la fintech. Notre mission est de révolutionner la manière dont les institutions financières gèrent leurs opérations, en les rendant plus efficaces et centrées sur le client.',
         type: type[randomTypeIndex],
+
         offerSkills: {
           create: [
             { Skills: { create: { name: allSkills[Math.floor(Math.random() * 72)] } } },
@@ -157,11 +183,21 @@ async function main() {
             { Skills: { create: { name: allSkills[Math.floor(Math.random() * 72)] } } },
           ],
         },
+        servicesId: departmentsIds[Math.floor(Math.random() * 6)]
       },
     })
-  
+    offerIds.push(createdOffer.id)
     console.log('Created Offer:', createdOffer)
-}}
+  }
+  // for (let demande of demandesData) {
+  //   await prisma.demande.createMany({ data: {
+  //      ...demande,
+  //       offerId: offerIds[Math.floor(Math.random() * offerIds.length - 1)]} })
+  // }
+
+
+
+}
 main()
   .catch((e) => {
     console.error(e);

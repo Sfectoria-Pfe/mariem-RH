@@ -26,7 +26,7 @@ const App = () => {
 
       <Outlet />
    
-      <CtaSection />
+   
       <Footer />
     </div>
   );

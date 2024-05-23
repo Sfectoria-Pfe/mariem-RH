@@ -10,9 +10,10 @@ import { AuthModule } from './auth/auth.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { DemandeModule } from './demande/demande.module';
 import { CvModule } from './cv/cv.module';
+import { ServicesModule } from './services/services.module';
 
 @Module({
-  imports: [PrismaModule, UsersModule, JobOffersModule, AuthModule, ContactsModule, DemandeModule, CvModule],
+  imports: [PrismaModule, UsersModule, JobOffersModule, AuthModule, ContactsModule, DemandeModule, CvModule, ServicesModule],
   controllers: [AppController],
   providers: [AppService,PrismaService],
 })

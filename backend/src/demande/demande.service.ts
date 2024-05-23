@@ -8,13 +8,13 @@ import { Demande } from './entities/demande.entity';
 export class DemandeService {
   constructor(private prisma: PrismaService) {}
 
-  create(createDemandeDto: CreateDemandeDto) {
+  async create(createDemandeDto: CreateDemandeDto) {
     const { offerId, ...rest } = createDemandeDto;
     return this.prisma.demande.create({ data: createDemandeDto });
   }
 
-  findAll() {
-    return `This action returns all demande`;
+  async findAll() {
+    return await this.prisma.demande.findMany({include:{Offer:{include:{offerSkills:{include:{Skills:true}}}}}})
   }
 
   findOne(id: number) {

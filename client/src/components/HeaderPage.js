@@ -5,7 +5,7 @@ export default function HeaderPage({ img, heading, subheading,className }) {
 
 
             <div
-                class="relative h-[450px] overflow-hidden bg-cover bg-[50%] bg-no-repeat" style={{ color: 'white', backgroundImage: `url(${img})` }}>
+                class="relative h-[450px] overflow-hidden bg-cover bg-[50%] bg-no-repeat"  style={{ color: 'white', backgroundImage: `url(${img})` ,}}>
                 <div
                     class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-black/60 bg-fixed">
                     <div class="flex h-full items-center justify-center">

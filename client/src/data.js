@@ -132,24 +132,24 @@ export const ctaData = {
 
 export const footerData = {
   logo: LogoV2,
-  address: 'Product Texas, 234 Bokki Avenue Street BMW 99388',
-  email: 'info@producttexas.project',
-  phone: '1-232-7788 (Main)',
+  address: 'Mailing Address : 40, rue 18 Janvier 1952, 1001 Tunis RP – TUNISIA',
+  email: 'info@coficab.com',
+  phone: '(+216) 71 156 000',
   list1: [
     {
-      name: 'Profile',
+      name: 'Home',
+      href: '/',
+    },
+    {
+      name: "Offre d'emploi",
       href: '#',
     },
     {
-      name: 'Features',
+      name: 'Offer de stage',
       href: '#',
     },
     {
-      name: 'Careers',
-      href: '#',
-    },
-    {
-      name: 'DW News',
+      name: 'Conatct',
       href: '#',
     },
   ],
@@ -170,22 +170,19 @@ export const footerData = {
       name: 'Reports',
       href: '#',
     },
-    {
-      name: 'Q & A',
-      href: '#',
-    },
+   
   ],
   socialList: [
     {
-      icon: <FaYoutube />,
+      icon: <FaYoutube color='red'/>,
       href: '#',
     },
     {
-      icon: <FaInstagram />,
+      icon: <FaInstagram color='#f64354'/>,
       href: '#',
     },
     {
-      icon: <FaGithub />,
+      icon: <FaGithub color='black' />,
       href: '#',
     },
   ],

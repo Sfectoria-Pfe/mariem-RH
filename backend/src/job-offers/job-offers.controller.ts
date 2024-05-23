@@ -16,6 +16,14 @@ export class JobOffersController {
   findAll() {
     return this.jobOffersService.findAll();
   }
+  @Get("/offre-de-stage")
+  findAllOffreDeStage() {
+    return this.jobOffersService.findAllOffreDeStage();
+  }
+  @Get("/by-service/:id")
+  findAllByService(@Param('id') id:string) {
+    return this.jobOffersService.findAllByService(id);
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

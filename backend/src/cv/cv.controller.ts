@@ -18,6 +18,7 @@ import { diskStorage } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import * as pdfParse from 'pdf-parse';
+
 @Controller('cv')
 export class CvController {
   constructor(private readonly cvService: CvService) {}
@@ -31,7 +32,6 @@ export class CvController {
           //  Create folder if doesn't exist
           if (!existsSync(uploadPath)) {
             mkdirSync(uploadPath);
-         
           }
           cb(null, uploadPath);
         },
@@ -57,26 +57,24 @@ export class CvController {
       extension: file.filename.split('.')[1],
       type: file.mimetype,
       frontPath: 'http://localhost:4000/' + 'upload/' + file.filename,
-
       path: 'upload/' + file.filename,
     };
+
     if (!offerId) {
       throw new Error('Offer ID is required.');
     }
 
-   
-
     const pdffile = fs.readFileSync(data.path);
-
-    const parsedData = await pdfParse(pdffile)
+    const parsedData = await pdfParse(pdffile);
     const pdfText = parsedData.text;
-   
-    
-    // const matchScore = await this.cvService.calculateMatchScore(pdfText , offerId);
-    const matchScore = await this.cvService.calculateMatchScore(pdfText , offerId);
 
-    return { matchScore,data};
+    const { matchScore, commonWords } = await this.cvService.calculateMatchScore(pdfText, offerId);
+console.log(matchScore,"match score");
+    console.log(commonWords,"common words");
+    console.log(data,"data");
     
+
+    return { matchScore, commonWords, data };
   }
 
   @Get()
