@@ -55,6 +55,7 @@ enum Role {
   ResponsableRH
 }
 
+
 model Offer {
   id          String @id @default(uuid())
   title       String
@@ -101,6 +102,8 @@ model Demande {
   offerId     String?
   serviceDemande ServiceDemande[]
   matchedSkills Json?
+  status  Status @default(pending)
+  interviewed Status @default(pending)
 }
 model ServiceDemande {
   id String @id @default(uuid())
@@ -119,4 +122,10 @@ model Lettre {
   id            String @id @default(uuid())
   type          String
   contenuLettre String
+}
+
+enum Status{
+  pending
+  accepted
+  refused
 }

@@ -6,6 +6,7 @@ import { PassportModule } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 
+
 export const jwtSecret = 'sfectoria07112023';
 @Module({
   imports: [

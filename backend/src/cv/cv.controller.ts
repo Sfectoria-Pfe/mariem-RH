@@ -14,7 +14,7 @@ import { CreateCvDto } from './dto/create-cv.dto';
 import { UpdateCvDto } from './dto/update-cv.dto';
 import { extname } from 'path';
 import { existsSync, mkdirSync } from 'fs';
-import { diskStorage } from 'multer';
+import { diskStorage  } from 'multer';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import * as pdfParse from 'pdf-parse';

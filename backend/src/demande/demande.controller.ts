@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { DemandeService } from './demande.service';
 import { CreateDemandeDto, UpdateScoreDto } from './dto/create-demande.dto';
 import { UpdateDemandeDto } from './dto/update-demande.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags("demande")
 @Controller('demande')
 export class DemandeController {
   constructor(private readonly demandeService: DemandeService) {}
@@ -25,6 +26,10 @@ export class DemandeController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateScoreDto) {
     return this.demandeService.update(id, dto);
+  }
+  @Patch('updateDem/:id')
+  updateDem(@Param('id') id: string, @Body() dto: UpdateDemandeDto) {
+    return this.demandeService.updateDem(id, dto);
   }
 
   @Delete(':id')
