@@ -12,6 +12,7 @@ import {
 import { Heat } from '@alptugidin/react-circular-progress-bar'
 import HeaderPage from '../../../components/HeaderPage';
 import Chip from '@mui/joy/Chip';
+import axios from 'axios';
 
 export default function DemandeDetails() {
   const location = useLocation();
@@ -20,6 +21,15 @@ export default function DemandeDetails() {
   if (!row) {
     return <div>No data available</div>;
   }
+
+const updateStatus=async(status)=>{
+  const body={status:status,name:row.name,lastName:row.lastName,email:row.email}
+  console.log(body,"body");
+  await axios.patch(`http://localhost:4000/demande/updateDem/${row.id}`,body);
+}
+
+
+
   return (
     <div className='card'>
       <div className="mx-5">
@@ -152,10 +162,10 @@ export default function DemandeDetails() {
         </MDBRow>
 
         <div className="d-flex mb-5 gap-2  justify-content-start">
-        <button className="btn btn-success btn-lg " >
+        <button className="btn btn-success btn-lg " onClick={()=>{updateStatus("accepted")}} >
           Agree
         </button>
-        <button className="btn btn-danger btn-lg" >
+        <button className="btn btn-danger btn-lg" onClick={()=>{updateStatus("refused")}} >
          Refuse
         </button>
         </div>

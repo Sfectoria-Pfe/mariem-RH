@@ -101,9 +101,28 @@ const navigate = useNavigate()
     {
       field: "email",
       headerName: "Email",
-      width: 250,
+      width: 230,
       editable: true,
       valueGetter: (value,row)=>row?.email
+    },
+    {
+      field: "status",
+      headerName: "Status",
+      width: 100,
+      editable: true,
+      
+      renderCell:(value,row)=>(
+        // <p className='' style={{margin:"10px",color:"white", background:value.row.status === "pending" ? "yellow" : value.row.status === "accepted" ? "green" : "red"}}>{value?.row.status}</p>
+        <Chip
+        variant="filled"
+        color="primary"
+        size="sm"
+        sx={{ pointerEvents: 'none', padding: "10px",background:value.row.status === "pending" ? "#ffc107" : value.row.status === "accepted" ? "green" : "red", color: "white" ,marginLeft:"10px",width:"100px"}}
+      
+      >
+     {value?.row.status}
+      </Chip>
+      )
     },
     {
       field: "cv",
@@ -151,7 +170,7 @@ const navigate = useNavigate()
     {
       field: "score",
       headerName: "Score",
-      width: 250,
+      width: 150,
       editable: true,
       // valueGetter: (value,row)=>row?.score
       renderCell:(value,row)=>(

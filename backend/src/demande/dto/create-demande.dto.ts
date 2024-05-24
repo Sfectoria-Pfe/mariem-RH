@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-
+import {Status} from "@prisma/client"
 export class CreateDemandeDto {
   @ApiProperty()
   name: string;
@@ -29,6 +29,8 @@ export class CreateDemandeDto {
   offerId: string;
   @ApiProperty()
   score: number;
+  @ApiProperty()
+  status: Status ;
 }
 export class UpdateScoreDto{
   @ApiProperty()

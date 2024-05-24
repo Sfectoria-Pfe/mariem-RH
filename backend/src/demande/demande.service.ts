@@ -4,7 +4,7 @@ import { UpdateDemandeDto } from './dto/update-demande.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Demande } from './entities/demande.entity';
 import { MailService } from 'src/mail/mail.service';
-
+import { Status } from '@prisma/client';
 @Injectable()
 export class DemandeService {
   constructor(private prisma: PrismaService , private readonly nodeMailerService: MailService) {}
@@ -33,13 +33,17 @@ export class DemandeService {
     return response
   }
   async updateDem(id: string, dto: UpdateDemandeDto) {
-    const {score}=dto
+    const {email,name,lastName,...rest}=dto
+   
     const response = await this.prisma.demande.update({
       where: { id },
-      data: dto,
+      data: {...rest},
     });
     console.log(response,"reponse score");
-    await this.nodeMailerService.mailAcceptedDemande(dto.email);
+    if (dto.status === Status.accepted) {
+      await this.nodeMailerService.mailAcceptedDemande(email,lastName,name);
+    } else{
+      await this.nodeMailerService.mailRefusedDemande(email,lastName,name);}
     return response
   }
 
