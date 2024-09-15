@@ -4,6 +4,7 @@ import { UpdateAuthDto } from './dto/update-auth.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -41,19 +42,55 @@ async getMyInfo(token:string){
   return myInfo
 }
 
-  findAll() {
-    return `This action returns all auth`;
+async updateMe(dto: UpdateUserDto, id: string) {
+  if (dto['password']) {
+    throw new HttpException(
+      'Vous ne pouvez pas modifier le mot de passe',
+      HttpStatus.BAD_REQUEST,
+    );
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
+  if (dto.email) {
+    const existingUser = await this.prisma.user.findFirst({
+      where: {
+        email: dto.email,
+        id: {
+          not : id, // Exclude the current user
+        },
+      },
+    });
+
+    if (existingUser) {
+      throw new HttpException(
+        "L'adresse e-mail est déjà utilisée",
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+  const updatedUser = await this.prisma.user.update({
+    where: { id: id },
+    data: dto,
+  });
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
+  const { password, ...rest } = updatedUser;
+  const token = this.jwt.sign(rest);
+  return token;
+  }
+
+findAll() {
+  return `This action returns all auth`;
+}
+
+findOne(id: number) {
+  return `This action returns a #${id} auth`;
+}
+
+update(id: number, updateAuthDto: UpdateAuthDto) {
+  return `This action updates a #${id} auth`;
+}
+
+remove(id: number) {
+  return `This action removes a #${id} auth`;
+}
 }

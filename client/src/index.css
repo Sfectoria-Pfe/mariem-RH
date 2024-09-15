@@ -35,21 +35,7 @@
   }
 }
 
-/* @media (max-width: 760px) {
-  .resp{
-    height: 25vh;
-  }
-}
-@media (max-width: 656px) {
-  .resp{
-    height: 14vh;
-  }
-}
-@media (max-width: 330px) {
-  .resp{
-    height: 8vh !important;
-  }
-} */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

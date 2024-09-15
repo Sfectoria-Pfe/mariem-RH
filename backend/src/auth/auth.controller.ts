@@ -15,6 +15,7 @@ import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { request } from 'http';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 @Controller('auth')
 @ApiTags('auth')
@@ -49,13 +50,17 @@ export class AuthController {
     return this.authService.getMyInfo(token);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
+  //   return this.authService.update(+id, updateAuthDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.authService.remove(+id);
+  }
+  @Patch(':id')
+  updateMe(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.authService.updateMe(updateUserDto,id);
   }
 }

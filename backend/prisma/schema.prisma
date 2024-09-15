@@ -9,42 +9,46 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = "mysql://root:95134505Yy*@localhost:3306/gr"
+  provider = "postgres"
+  url      = "postgres://postgres:postgres@localhost:5432/gr"
 }
 
 model User {
-  id       String @id @default(uuid())
-  name     String
-  age      Int
-  email    String @unique
-  password String
-  role     Role   @default(Employe)
+  id        String   @id @default(uuid())
+  name      String
+  lastName  String?
+  bio       String?
+  age       Int?
+  email     String   @unique
+  password  String
+  role      Role     @default(Employe)
+  avatar    String?
+  createdAt DateTime @default(now())
 }
 
-model Intern {
-  id  String @id @default(uuid())
-  name String
-  lastName String
-  tel String
-  adress String
-  email String
 
-  cin Int
-  birth DateTime
-  debutDeStage DateTime @default(now())
-  finDeStage DateTime @default(now())
-  services   Services? @relation(fields: [servicesId], references: [id])
-  servicesId String?
+model Intern {
+  id       String @id @default(uuid())
+  name     String
+  lastName String
+  tel      String
+  adress   String
+  email    String
+
+  cin          Int
+  birth        DateTime
+  debutDeStage DateTime  @default(now())
+  finDeStage   DateTime  @default(now())
+  services     Services? @relation(fields: [servicesId], references: [id])
+  servicesId   String?
 }
 
 model Services {
-  id String @id @default(uuid())
-  title String
-  interns Intern[]
+  id             String           @id @default(uuid())
+  title          String
+  interns        Intern[]
   serviceDemande ServiceDemande[]
-  offer Offer[]
-
+  offer          Offer[]
 }
 
 enum Role {
@@ -55,20 +59,18 @@ enum Role {
   ResponsableRH
 }
 
-
 model Offer {
-  id          String @id @default(uuid())
+  id          String        @id @default(uuid())
   title       String
   type        String
-  description String @db.Text
- created_at  DateTime    @default(now())
-  services   Services? @relation(fields: [servicesId], references: [id])
-  servicesId String?
+  description String        @db.Text
+  post  String?
+  created_at  DateTime      @default(now())
+  services    Services?     @relation(fields: [servicesId], references: [id])
+  servicesId  String?
   demande     Demande[]
   offerSkills OfferSkills[]
 }
-
-
 
 model OfferSkills {
   id String @id @default(uuid())
@@ -87,28 +89,29 @@ model Skills {
 }
 
 model Demande {
-  id          String  @id @default(uuid())
-  name        String
-  lastName    String
-  age         Int
-  phoneNumber Int
-  adress      String
-  email       String
-  cv          String
-  note        String
-  type        String
-  score       Float   @default(0)
-  Offer       Offer?  @relation(fields: [offerId], references: [id])
-  offerId     String?
+  id             String           @id @default(uuid())
+  name           String
+  lastName       String
+  age            Int
+  phoneNumber    Int
+  adress         String
+  email          String
+  cv             String
+  note           String
+  type           String
+  score          Float            @default(0)
+  Offer          Offer?           @relation(fields: [offerId], references: [id])
+  offerId        String?
   serviceDemande ServiceDemande[]
-  matchedSkills Json?
-  status  Status @default(pending)
-  interviewed Status @default(pending)
+  matchedSkills  Json?
+  status         Status           @default(pending)
+  interviewed    Status           @default(pending)
 }
+
 model ServiceDemande {
   id String @id @default(uuid())
 
-  demande   Demande?  @relation(fields: [demandeId], references: [id])
+  demande    Demande?  @relation(fields: [demandeId], references: [id])
   demandeId  String?
   services   Services? @relation(fields: [servicesId], references: [id])
   servicesId String?
@@ -124,7 +127,7 @@ model Lettre {
   contenuLettre String
 }
 
-enum Status{
+enum Status {
   pending
   accepted
   refused

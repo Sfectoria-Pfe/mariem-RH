@@ -28,6 +28,9 @@ import Demandes from "../pages/demandes/Demandes";
 import DemandesList from "../pages/demandes/views/DemandesList";
 import AddDemande from "../pages/demandes/views/AddDemande";
 import DemandeDetails from "../pages/demandes/views/DemandeDetails";
+import Employees from "../pages/employees/Employees";
+import EmployeeList from "../pages/employees/EmployeeList";
+import AddEmp from "../pages/employees/AddEmp";
 // export default function Router() {
 //   const user = true;
 
@@ -54,6 +57,8 @@ const Router = () => {
   useEffect(() => {
     getMe();
   }, [update]);
+  console.log(update,"update from router");
+  
   return (
     <div>
       <BrowserRouter>
@@ -64,13 +69,29 @@ const Router = () => {
                 <Route index element={<Dashboard />} />
                 <Route
                   path="profile"
+                 
                   element={
                     <PrivateRoute
-                      component={<Profile />}
+                    component={<Profile update={update} setUpdate={setUpdate} />}
                       roles={["Admin", "ResponsableRH"]}
                     />
                   }
                 />
+                <Route
+                  path="employees"
+                 
+                  element={
+                    <PrivateRoute
+                    component={<Employees  />}
+                      roles={["Admin", "ResponsableRH"]}
+                    />
+                  }
+                >
+                  <Route index element={<EmployeeList />} />
+                  <Route path="add-employee" element={<AddEmp />} />
+
+                </Route>
+                
                 <Route
                   path="joboffre"
                   element={
@@ -80,6 +101,7 @@ const Router = () => {
                     />
                   }
                 >
+            
                   <Route index element={<JobOffreList />} />
                   <Route path="add-jobOffer" element={<AddJobOffre />} />
                   <Route path="jobOffer-detail/:id" element={<JobOffreDetail />} />

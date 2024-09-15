@@ -16,9 +16,13 @@ export class UsersService {
     });
   }
 
-    async findAll() {
-      return await this.prisma.user.findMany({});
-    }
+  async findAll() {
+    return await this.prisma.user.findMany({
+      orderBy: {
+        createdAt: 'desc',  // sorts by newest first
+      },
+    });
+  }
 
      async findOne(id: string) {
       return await this.prisma.user.findUnique({ where: { id } });

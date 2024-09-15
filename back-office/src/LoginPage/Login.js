@@ -59,6 +59,8 @@ const LoginTest = ({ setUpdate, update }) => {
     try {
       const res = await axios.post("http://localhost:4000/auth",{email,password});
       localStorage.setItem("token", JSON.stringify(res.data)); //bech thot objet ka string
+      console.log(res.data,"restoken");
+      
       setUpdate(!update);
       navigate("/");
       toast("Wow so easy!")
